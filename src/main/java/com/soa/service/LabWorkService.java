@@ -34,6 +34,13 @@ public class LabWorkService {
         return labWorkConverter.convertToDto(entity);
     }
 
+    public LabWorkDto increaseStepsCount(Integer id, Integer stepsCount) {
+        LabWorkEntity entity = labWorkDbService.findById(id).orElseThrow(EntityNotFoundException::new);
+        entity.setStepsCount(entity.getStepsCount() + stepsCount);
+        labWorkDbService.save(entity);
+        return labWorkConverter.convertToDto(entity);
+    }
+
     public LabWorkDto findById(Integer id) {
         LabWorkEntity entity = labWorkDbService.findById(id).orElseThrow(EntityNotFoundException::new);
         return labWorkConverter.convertToDto(entity);

@@ -32,6 +32,7 @@ public class LabWorkConverter {
                 .setCreationDate(entity.getCreationDate())
                 .setMinimalPoint(entity.getMinimalPoint())
                 .setDifficulty(entity.getDifficulty())
+                .setStepsCount(entity.getStepsCount())
                 .setDiscipline(disciplineConverter.convertToDto(entity.getDiscipline()));
         return dto;
     }

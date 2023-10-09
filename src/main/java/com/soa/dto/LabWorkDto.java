@@ -26,4 +26,6 @@ public class LabWorkDto {
     private Difficulty difficulty;
     @NotNull
     private DisciplineDto discipline;
+    @JsonIgnoreProperties
+    private int stepsCount;
 }

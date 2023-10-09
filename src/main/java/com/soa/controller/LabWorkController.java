@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -25,6 +26,11 @@ public class LabWorkController {
     @PutMapping("/{id}")
     public ResponseEntity<LabWorkDto> updateLabWork(@PathVariable(name = "id") Integer id, @Valid @RequestBody LabWorkDto dto) {
         return ResponseEntity.status(200).body(labWorkService.updateLabWork(id, dto));
+    }
+
+    @PutMapping("/{id}/difficulty/increase/{steps-count}")
+    public ResponseEntity<LabWorkDto> increaseStepsCount(@Valid @Min(1) @PathVariable(name = "id") Integer id, @Valid @Min(0) @PathVariable(name = "steps-count") Integer stepsCount) {
+        return ResponseEntity.status(200).body(labWorkService.increaseStepsCount(id, stepsCount));
     }
 
     @GetMapping("/{id}")

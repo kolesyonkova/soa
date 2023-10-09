@@ -28,7 +28,9 @@ public class LabWorkEntity {
     @Column(name = "CREATION_DATE")
     private LocalDate creationDate;
     @Column(name = "MINIMAL_POINT")
-    private int minimalPoint;
+    private int minimalPoint = 0;
+    @Column(name = "STEPS_COUNT")
+    private int stepsCount = 0;
     @Column(name = "DIFFICULTY")
     @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
