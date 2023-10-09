@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "89aba549-c75d-470a-973e-5c2d425c08ae",
+		"name": "LabSoa2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Добавить лабораторную работу",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"test_7123ff1a10b9\",\r\n  \"coordinates\": {\r\n    \"x\": 56,\r\n    \"y\": 29.18\r\n  },\r\n  \"creationDate\": \"2021-01-26\",\r\n  \"minimalPoint\": 50,\r\n  \"difficulty\": \"NORMAL\",\r\n  \"discipline\": {\r\n    \"name\": \"test_df3c495fbf21\",\r\n    \"selfStudyHours\": 25\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/labworks",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"labworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получить лабораторную работу по id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/labworks/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"labworks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновить лабораторную работу",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"test_7123ff1a10b9\",\r\n  \"coordinates\": {\r\n    \"x\": 57,\r\n    \"y\": 29.18\r\n  },\r\n  \"creationDate\": \"2021-01-26\",\r\n  \"minimalPoint\": 58,\r\n  \"difficulty\": \"NORMAL\",\r\n  \"discipline\": {\r\n    \"name\": \"test_df3c495fbf21\",\r\n    \"selfStudyHours\": 25\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/labworks/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"labworks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Удалить лабораторную работу",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/labworks/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"labworks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получить сумму минимальных по всем лабораторным работам",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/labworks/minimal-point/sum",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"labworks",
+						"minimal-point",
+						"sum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получить лабораторные работы сгруппированные по результатам",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/labworks/coordinates/grouped",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"labworks",
+						"coordinates",
+						"grouped"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получить лабораторные работы с большим количеством параметров",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/labworks/list?limit=10&offset=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"labworks",
+						"list"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "l1,l9",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "asc",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "1,2",
+							"disabled": true
+						},
+						{
+							"key": "minimalPoint",
+							"value": "5",
+							"disabled": true
+						},
+						{
+							"key": "difficulties",
+							"value": "NORMAL, IMPOSSIBLE",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2 Сервис Повысить сложность заданной лабораторной работы на указанное число шагов",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/bars/labwork/1/difficulty/increase/10",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"bars",
+						"labwork",
+						"1",
+						"difficulty",
+						"increase",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
