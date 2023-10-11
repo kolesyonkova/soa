@@ -32,7 +32,7 @@ public class LabWorkEntity {
     @Column(name = "DIFFICULTY")
     @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
-    @Embedded
-    @JoinColumn(name = "DISCIPLINE_ID")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "discipline_id")
     private DisciplineEntity discipline;
 }
