@@ -3,6 +3,7 @@ package com.soa.handler;
 import com.soa.controller.LabWorkController;
 import com.soa.dto.ErrorMessage;
 import com.soa.exception.EntityNotFoundException;
+import com.soa.exception.IncreaseNotAvailableException;
 import com.soa.exception.NotValidParamsException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -32,6 +33,12 @@ public class ProcessExceptionHandler {
     @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e) {
         return ResponseEntity.status(404)
+                .body(errorMessage.setMessage(e.getMessage()));
+    }
+
+    @ExceptionHandler({IncreaseNotAvailableException.class})
+    public ResponseEntity<?> handleIncreaseNotAvailableException(IncreaseNotAvailableException e) {
+        return ResponseEntity.status(422)
                 .body(errorMessage.setMessage(e.getMessage()));
     }
 

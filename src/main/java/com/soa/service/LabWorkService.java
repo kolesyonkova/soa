@@ -1,10 +1,12 @@
 package com.soa.service;
 
 import com.soa.converter.LabWorkConverter;
+import com.soa.dto.Difficulty;
 import com.soa.dto.FilterQueryDto;
 import com.soa.dto.LabWorkDto;
 import com.soa.entity.LabWorkEntity;
 import com.soa.exception.EntityNotFoundException;
+import com.soa.exception.IncreaseNotAvailableException;
 import com.soa.filter.FilterService;
 import com.soa.service.db.LabWorkDbService;
 import lombok.AllArgsConstructor;
@@ -36,7 +38,10 @@ public class LabWorkService {
 
     public LabWorkDto increaseStepsCount(Integer id, Integer stepsCount) {
         LabWorkEntity entity = labWorkDbService.findById(id).orElseThrow(EntityNotFoundException::new);
-        entity.setStepsCount(entity.getStepsCount() + stepsCount);
+        if (entity.getDifficulty().getMaxAvailableIncrease() < stepsCount) {
+            throw new IncreaseNotAvailableException(entity.getDifficulty().getMaxAvailableIncrease());
+        }
+        entity.setDifficulty(Difficulty.getDifficulty(entity.getDifficulty().getCurrentDifficulty() + stepsCount));
         labWorkDbService.save(entity);
         return labWorkConverter.convertToDto(entity);
     }

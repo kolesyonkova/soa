@@ -23,7 +23,7 @@ public class FilterQueryDto {
     private List<Integer> disciplineSelfStudyHours = null;
     private List<String> name = null;
     private List<Integer> minimalPoint = null;
-    private List<Difficulty> difficulties = null;
+    private List<Difficulty> difficulty = null;
     private String sort;
     private Integer offset;
     private Integer limit;

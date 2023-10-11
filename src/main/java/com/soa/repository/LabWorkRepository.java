@@ -25,7 +25,7 @@ public interface LabWorkRepository extends JpaRepository<LabWorkEntity, Integer>
             + "((:#{#dto.name}) is null or l.name in (:#{#dto.name}))"
             + "and ((:#{#dto.id}) is null or l.id in (:#{#dto.id}))"
             + "and ((:#{#dto.minimalPoint}) is null or l.minimalPoint in (:#{#dto.minimalPoint}))"
-            + "and ((:#{#dto.difficulties}) is null or l.difficulty in (:#{#dto.difficulties}))"
+            + "and ((:#{#dto.difficulty}) is null or l.difficulty in (:#{#dto.difficulty}))"
             + "and ((:#{#dto.coordinatesX}) is null or l.coordinates.x in (:#{#dto.coordinatesX}))"
             + "and ((:#{#dto.coordinatesY}) is null or l.coordinates.y in (:#{#dto.coordinatesY}))"
             + "and ((:#{#dto.disciplineName}) is null or l.discipline.name in (:#{#dto.disciplineName}))"
