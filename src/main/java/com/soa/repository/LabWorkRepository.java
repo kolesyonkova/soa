@@ -32,4 +32,11 @@ public interface LabWorkRepository extends JpaRepository<LabWorkEntity, Integer>
             + "and ((:#{#dto.disciplineSelfStudyHours}) is null or l.discipline.selfStudyHours in (:#{#dto.disciplineSelfStudyHours}))"
     )
     List<LabWorkEntity> getLabWorksWithFiltering(@Param("dto") FilterQueryDto dto, Pageable pageable);
+
+    @Query(value = "select * from lab_work l " +
+            "where l.labwork_name like concat('%', :name, '%') " +
+            "limit :limit",
+            nativeQuery = true)
+    List<LabWorkEntity> suggest(@Param("name") String name, @Param("limit") int limit);
+
 }

@@ -44,6 +44,13 @@ public class LabWorkController {
         return ResponseEntity.status(200).body(labWorkService.getLabWorksWithFiltering(dto));
     }
 
+    @GetMapping("/suggest")
+    public ResponseEntity<List<LabWorkDto>> getLabWorksSuggest(@RequestParam("name") String name,
+                                                               @RequestParam(value = "limit", defaultValue = "5") int limit) {
+
+        return ResponseEntity.status(200).body(labWorkService.getLabworksSuggest(name, limit));
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable(name = "id") Integer id) {

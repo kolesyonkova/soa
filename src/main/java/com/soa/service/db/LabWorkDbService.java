@@ -47,6 +47,11 @@ public class LabWorkDbService {
         return labWorkRepository.getLabWorksWithFiltering(dto, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public List<LabWorkEntity> suggest(String name, int limit) {
+        return labWorkRepository.suggest(name, limit);
+    }
+
     @Transactional
     public void deleteById(Integer id) {
         labWorkRepository.deleteById(id);

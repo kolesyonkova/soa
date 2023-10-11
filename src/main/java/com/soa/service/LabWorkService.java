@@ -52,6 +52,10 @@ public class LabWorkService {
         return labWorkDbService.getLabWorksWithFiltering(dto, request).stream().map(labWorkConverter::convertToDto).toList();
     }
 
+    public List<LabWorkDto> getLabworksSuggest(String name, int limit) {
+        return labWorkDbService.suggest(name, limit).stream().map(labWorkConverter::convertToDto).toList();
+    }
+
     public void deleteById(Integer id) {
         labWorkDbService.findById(id).orElseThrow(EntityNotFoundException::new);
         labWorkDbService.deleteById(id);
