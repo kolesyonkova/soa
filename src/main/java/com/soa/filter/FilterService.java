@@ -27,7 +27,7 @@ public class FilterService {
             checkNumberIsPositive("Limit", dto.getLimit());
         }
         if (dto.getOffset() != null) {
-            checkNumberIsPositive("Offset", dto.getOffset());
+            checkNumberIsNatural("Offset", dto.getOffset());
         }
     }
 
@@ -48,6 +48,12 @@ public class FilterService {
     public static void checkNumberIsPositive(String nameOfField, Integer number) {
         if (number <= 0) {
             throw new NotValidParamsException(nameOfField + " должен быть больше 0");
+        }
+    }
+
+    public static void checkNumberIsNatural(String nameOfField, Integer number) {
+        if (number < 0) {
+            throw new NotValidParamsException(nameOfField + " должен быть натуральным числом");
         }
     }
 

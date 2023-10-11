@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"test_7123ff1a10b9\",\r\n  \"coordinates\": {\r\n    \"x\": 56,\r\n    \"y\": 29.18\r\n  },\r\n  \"creationDate\": \"2021-01-26\",\r\n  \"minimalPoint\": 50,\r\n  \"difficulty\": \"NORMAL\",\r\n  \"discipline\": {\r\n    \"name\": \"test_df3c495fbf21\",\r\n    \"selfStudyHours\": 25\r\n  }\r\n}",
+					"raw": "{\r\n  \"name\": \"test_7123ff1a10b9\",\r\n  \"coordinates\": {\r\n    \"x\": 56,\r\n    \"y\": 29.18\r\n  },\r\n  \"minimalPoint\": 50,\r\n  \"difficulty\": \"NORMAL\",\r\n  \"discipline\": {\r\n    \"name\": \"test_df3c495fbf21\",\r\n    \"selfStudyHours\": 25\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -144,7 +144,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/labworks/list?limit=10&offset=1",
+					"raw": "localhost:8080/labworks/list?limit=10&offset=0",
 					"host": [
 						"localhost"
 					],
@@ -165,7 +165,7 @@
 						},
 						{
 							"key": "offset",
-							"value": "1"
+							"value": "0"
 						},
 						{
 							"key": "sort",
@@ -185,6 +185,26 @@
 						{
 							"key": "difficulties",
 							"value": "NORMAL, IMPOSSIBLE",
+							"disabled": true
+						},
+						{
+							"key": "coordinatesX",
+							"value": "56",
+							"disabled": true
+						},
+						{
+							"key": "coordinatesY",
+							"value": "28.18",
+							"disabled": true
+						},
+						{
+							"key": "disciplineName",
+							"value": "test_df3c495fbf21",
+							"disabled": true
+						},
+						{
+							"key": "disciplineSelfStudyHours",
+							"value": "26",
 							"disabled": true
 						}
 					]

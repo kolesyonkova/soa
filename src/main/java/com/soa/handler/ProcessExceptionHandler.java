@@ -37,7 +37,7 @@ public class ProcessExceptionHandler {
 
     @ExceptionHandler({NotValidParamsException.class})
     public ResponseEntity<?> handleNotValidParamsException(NotValidParamsException e) {
-        return ResponseEntity.status(400)
+        return ResponseEntity.status(422)
                 .body(errorMessage.setMessage(e.getMessage()));
     }
 

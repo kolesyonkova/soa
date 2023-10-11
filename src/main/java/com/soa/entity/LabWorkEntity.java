@@ -4,7 +4,7 @@ import com.soa.dto.Difficulty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ public class LabWorkEntity {
     @Embedded
     @JoinColumn(name = "COORDINATES_ID")
     private CoordinatesEntity coordinates;
-    @CreatedDate
+    @CreationTimestamp
     @Column(name = "CREATION_DATE")
     private LocalDate creationDate;
     @Column(name = "MINIMAL_POINT")

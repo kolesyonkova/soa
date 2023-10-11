@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Setter
@@ -18,6 +17,10 @@ import java.util.List;
 @JsonIgnoreProperties
 public class FilterQueryDto {
     private List<Integer> id = null;
+    private List<Integer> coordinatesX = null;
+    private List<Double> coordinatesY = null;
+    private List<String> disciplineName = null;
+    private List<Integer> disciplineSelfStudyHours = null;
     private List<String> name = null;
     private List<Integer> minimalPoint = null;
     private List<Difficulty> difficulties = null;
