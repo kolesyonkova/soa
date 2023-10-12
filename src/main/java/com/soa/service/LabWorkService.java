@@ -56,7 +56,7 @@ public class LabWorkService {
 
     public List<LabWorkDto> getLabWorksWithFiltering(FilterQueryDto dto) {
         FilterService.isValidRequestParams(dto);
-        PageRequest request = pageService.getPageRequest(dto.getLimit(), dto.getOffset(), dto.getSort(), dto.getSortingFields());
+        PageRequest request = pageService.getPageRequest(dto.getLimit(), dto.getOffset(), dto.getSortAsc(), dto.getSort());
         return labWorkDbService.getLabWorksWithFiltering(dto, request).stream().map(labWorkConverter::convertToDto).toList();
     }
 

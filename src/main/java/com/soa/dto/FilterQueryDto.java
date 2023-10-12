@@ -24,8 +24,8 @@ public class FilterQueryDto {
     private List<String> name = null;
     private List<Integer> minimalPoint = null;
     private List<Difficulty> difficulty = null;
-    private String sort;
-    private List<String> sortingFields = null;
+    private Boolean sortAsc;
+    private List<String> sort = null;
     private Integer offset;
     private Integer limit;
 }

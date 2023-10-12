@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class FilterService {
-    public static List<String> sortingFields = List.of("id", "name", "x", "y", "difficulty", "mimimalPoint", "disciplineName", "selfStudyHours");
+    public static List<String> sortingFields = List.of("id", "name", "x", "y", "difficulty", "minimalPoint", "disciplineName", "selfStudyHours");
 
     public static void isValidRequestParams(FilterQueryDto dto) {
         if (dto.getId() != null) {
@@ -24,8 +24,8 @@ public class FilterService {
             dto.getName().forEach(FilterService::checkValidName);
         }
 
-        if (dto.getSort() != null) {
-            checkSortParams(dto.getSort());
+        if (dto.getSortAsc() == null) {
+            dto.setSortAsc(true);
         }
 
         if (dto.getLimit() != null) {
@@ -34,22 +34,17 @@ public class FilterService {
         if (dto.getOffset() != null) {
             checkNumberIsNatural("Offset", dto.getOffset());
         }
-        if (dto.getSortingFields() != null) {
-            checkSortingFields(dto.getSortingFields());
+        if (dto.getSort() != null) {
+            checkSortingFields(dto.getSort());
+        } else {
+            dto.setSort(List.of());
         }
     }
 
     public static void checkValidName(String name) {
         checkEmpty(name);
-        if (name.length() <= 0) {
+        if (name.isEmpty()) {
             throw new NotValidParamsException("Длина имени должна быть больше 0");
-        }
-    }
-
-    public static void checkSortParams(String sort) {
-        checkEmpty(sort);
-        if (!(sort.equals("asc") || sort.equals("desc"))) {
-            throw new NotValidParamsException("Неверный параметр сортировки");
         }
     }
 

@@ -7,11 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class SortService {
-    public Sort.Direction getSort(String sort) {
-        if ("desc".equals(sort)) {
-            return Sort.Direction.DESC;
-        } else {
-            return Sort.Direction.ASC;
-        }
+    public Sort.Direction getSort(boolean sortAsc) {
+        return sortAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
     }
 }
