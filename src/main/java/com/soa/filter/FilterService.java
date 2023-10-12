@@ -1,6 +1,7 @@
 package com.soa.filter;
 
 import com.soa.dto.FilterQueryDto;
+import com.soa.dto.LabWorkDto;
 import com.soa.exception.NotValidParamsException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,9 @@ public class FilterService {
 
     public static void checkValidName(String name) {
         checkEmpty(name);
+        if (name.length() > 256) {
+            throw new NotValidParamsException("Длина имени должна быть меньше 256");
+        }
         if (name.isEmpty()) {
             throw new NotValidParamsException("Длина имени должна быть больше 0");
         }
@@ -70,6 +74,15 @@ public class FilterService {
         for (String field : fields) {
             if (!sortingFields.contains(field))
                 throw new NotValidParamsException("Поля не должны быть пустыми");
+        }
+    }
+    public static void validateLabWorksCoordinates(LabWorkDto labWork) {
+        if (labWork.getCoordinates().getX() <= -569) {
+            throw new NotValidParamsException("X координата должна быть больше -569");
+        }
+
+        if (labWork.getCoordinates().getY() <= -302.0) {
+            throw new NotValidParamsException("Y координата должна быть больше -302");
         }
     }
 }

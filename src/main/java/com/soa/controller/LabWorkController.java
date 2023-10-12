@@ -55,8 +55,7 @@ public class LabWorkController {
     @GetMapping("/suggest")
     public ResponseEntity<List<LabWorkDto>> getLabWorksSuggest(@RequestParam("name") String name,
                                                                @RequestParam(value = "limit", defaultValue = "5") int limit) {
-
-        return ResponseEntity.status(200).body(labWorkService.getLabworksSuggest(name, limit));
+        return ResponseEntity.status(200).body(labWorkService.getLabWorksSuggest(name, limit));
     }
 
     @GetMapping("/disciplines/suggest")

@@ -11,9 +11,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class DisciplineService {
-
     private final DisciplineDbService disciplineDbService;
-    private final LabWorkService labWorkService;
     private final DisciplineConverter disciplineConverter;
 
     public List<DisciplineDto> suggest(String name, int limit) {

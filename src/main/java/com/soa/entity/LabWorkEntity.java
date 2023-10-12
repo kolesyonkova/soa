@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.Instant;
 
 @Entity
 @Getter
@@ -26,7 +26,7 @@ public class LabWorkEntity {
     private CoordinatesEntity coordinates;
     @CreationTimestamp
     @Column(name = "CREATION_DATE")
-    private LocalDate creationDate;
+    private Instant creationDate;
     @Column(name = "MINIMAL_POINT")
     private int minimalPoint = 0;
     @Column(name = "DIFFICULTY")

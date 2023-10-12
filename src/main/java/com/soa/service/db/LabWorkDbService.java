@@ -23,6 +23,11 @@ public class LabWorkDbService {
         return labWorkRepository.save(labWorkEntity);
     }
 
+    @Transactional
+    public List<LabWorkEntity> saveAll(List<LabWorkEntity> labWorks) {
+        return labWorkRepository.saveAll(labWorks);
+    }
+
     @Transactional(readOnly = true)
     public Optional<LabWorkEntity> findById(Integer id) {
         return labWorkRepository.findById(id);

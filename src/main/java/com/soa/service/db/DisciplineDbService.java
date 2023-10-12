@@ -12,9 +12,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class DisciplineDbService {
-
     private final DisciplineRepository disciplineRepository;
-
 
     @Transactional(readOnly = true)
     public List<DisciplineEntity> suggest(String name, int limit) {

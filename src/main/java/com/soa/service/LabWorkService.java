@@ -8,7 +8,6 @@ import com.soa.entity.DisciplineEntity;
 import com.soa.entity.LabWorkEntity;
 import com.soa.exception.EntityNotFoundException;
 import com.soa.exception.IncreaseNotAvailableException;
-import com.soa.exception.NotValidParamsException;
 import com.soa.filter.FilterService;
 import com.soa.service.db.DisciplineDbService;
 import com.soa.service.db.LabWorkDbService;
@@ -27,14 +26,14 @@ public class LabWorkService {
     private final PageService pageService;
 
     public LabWorkDto createLabWork(LabWorkDto dto) {
-        validate(dto);
+        FilterService.validateLabWorksCoordinates(dto);
         LabWorkEntity entity = labWorkConverter.convertToEntity(dto);
         entity = labWorkDbService.save(entity);
         return labWorkConverter.convertToDto(entity);
     }
 
     public LabWorkDto updateLabWork(Integer id, LabWorkDto dto) {
-        validate(dto);
+        FilterService.validateLabWorksCoordinates(dto);
         labWorkDbService.findById(id).orElseThrow(EntityNotFoundException::new);
         LabWorkEntity entity = labWorkConverter.convertToEntity(dto);
         entity.setId(id);
@@ -63,7 +62,7 @@ public class LabWorkService {
         return labWorkDbService.getLabWorksWithFiltering(dto, request).stream().map(labWorkConverter::convertToDto).toList();
     }
 
-    public List<LabWorkDto> getLabworksSuggest(String name, int limit) {
+    public List<LabWorkDto> getLabWorksSuggest(String name, int limit) {
         return labWorkDbService.suggest(name, limit).stream().map(labWorkConverter::convertToDto).toList();
     }
 
@@ -75,20 +74,9 @@ public class LabWorkService {
     public List<LabWorkDto> makeHardcore(Integer id) {
         DisciplineEntity discipline = disciplineDbService.findById(id).orElseThrow(EntityNotFoundException::new);
         List<LabWorkEntity> labWorkEntities = labWorkDbService.getHardestLabWorks();
-        for (LabWorkEntity entity : labWorkEntities) {
-            entity.setDiscipline(discipline);
-            labWorkDbService.save(entity);
-        }
+        labWorkEntities.forEach(e -> e.setDiscipline(discipline));
+        labWorkDbService.saveAll(labWorkEntities);
         return labWorkEntities.stream().map(labWorkConverter::convertToDto).toList();
     }
 
-    private void validate(LabWorkDto labWork) {
-        if (labWork.getCoordinates().getX() <= -569) {
-            throw new NotValidParamsException("X координата должна быть больше -569");
-        }
-
-        if (labWork.getCoordinates().getY() <= -302.0) {
-            throw new NotValidParamsException("Y координата должна быть больше -302");
-        }
-    }
 }

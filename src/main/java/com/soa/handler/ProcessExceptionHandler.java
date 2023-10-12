@@ -28,37 +28,37 @@ public class ProcessExceptionHandler {
     @ExceptionHandler({Exception.class})
     public ResponseEntity<?> handleException(Exception e) {
         return ResponseEntity.status(400)
-                .body(errorMessage.setMessage(e.getMessage()));
+                .body(errorMessage.setMessage("Произошла ошибка: " + e));
     }
 
     @ExceptionHandler({InvalidFormatException.class})
     public ResponseEntity<?> handleInvalidFormatException(InvalidFormatException e) {
         return ResponseEntity.status(400)
-                .body(errorMessage.setMessage(e.getMessage()));
+                .body(errorMessage.setMessage("Произошла ошибка: " + e.getMessage()));
     }
 
     @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e) {
         return ResponseEntity.status(404)
-                .body(errorMessage.setMessage(e.getMessage()));
+                .body(errorMessage.setMessage("Произошла ошибка: " + e.getMessage()));
     }
 
     @ExceptionHandler({IncreaseNotAvailableException.class})
     public ResponseEntity<?> handleIncreaseNotAvailableException(IncreaseNotAvailableException e) {
         return ResponseEntity.status(422)
-                .body(errorMessage.setMessage(e.getMessage()));
+                .body(errorMessage.setMessage("Произошла ошибка: " + e.getMessage()));
     }
 
     @ExceptionHandler({NotValidParamsException.class})
     public ResponseEntity<?> handleNotValidParamsException(NotValidParamsException e) {
         return ResponseEntity.status(422)
-                .body(errorMessage.setMessage(e.getMessage()));
+                .body(errorMessage.setMessage("Произошла ошибка: " + e.getMessage()));
     }
 
     @ExceptionHandler({DateTimeParseException.class})
     public ResponseEntity<?> handleDateTimeParseException(DateTimeParseException e) {
         return ResponseEntity.status(422)
-                .body(errorMessage.setMessage(e.getMessage()));
+                .body(errorMessage.setMessage("Произошла ошибка: " + e.getMessage()));
     }
 
     @ExceptionHandler({HttpMessageNotReadableException.class})
