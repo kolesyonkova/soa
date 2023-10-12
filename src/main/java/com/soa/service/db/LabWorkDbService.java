@@ -49,6 +49,11 @@ public class LabWorkDbService {
     }
 
     @Transactional(readOnly = true)
+    public List<LabWorkEntity> getHardestLabWorks() {
+        return labWorkRepository.getHardestLabWorks();
+    }
+
+    @Transactional(readOnly = true)
     public List<LabWorkEntity> suggest(String name, int limit) {
         return labWorkRepository.suggest(name, limit);
     }

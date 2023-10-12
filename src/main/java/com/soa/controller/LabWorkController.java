@@ -26,6 +26,11 @@ public class LabWorkController {
         return ResponseEntity.status(200).body(labWorkService.createLabWork(dto));
     }
 
+    @PostMapping("/discipline/{discipline-id}/make-hardcore")
+    public ResponseEntity<List<LabWorkDto>> makeHardcore(@PathVariable("discipline-id") Integer id) {
+        return ResponseEntity.status(200).body(labWorkService.makeHardcore(id));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<LabWorkDto> updateLabWork(@PathVariable(name = "id") Integer id, @Valid @RequestBody LabWorkDto dto) {
         return ResponseEntity.status(200).body(labWorkService.updateLabWork(id, dto));

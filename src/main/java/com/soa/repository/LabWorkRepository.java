@@ -35,6 +35,9 @@ public interface LabWorkRepository extends JpaRepository<LabWorkEntity, Integer>
     )
     List<LabWorkEntity> getLabWorksWithFiltering(@Param("dto") FilterQueryDto dto, Pageable pageable);
 
+    @Query(value = "select * from lab_work l order by difficulty desc limit 10", nativeQuery = true)
+    List<LabWorkEntity> getHardestLabWorks();
+
     @Query(value = "select * from lab_work l " +
             "where l.labwork_name like concat('%', :name, '%') " +
             "limit :limit",

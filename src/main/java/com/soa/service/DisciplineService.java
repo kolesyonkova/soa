@@ -1,14 +1,12 @@
 package com.soa.service;
 
-import java.util.List;
-
 import com.soa.converter.DisciplineConverter;
-import com.soa.converter.LabWorkConverter;
 import com.soa.dto.DisciplineDto;
-import com.soa.dto.LabWorkDto;
 import com.soa.service.db.DisciplineDbService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
