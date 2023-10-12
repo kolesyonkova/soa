@@ -1,6 +1,7 @@
 package com.soa.service.db;
 
 import com.soa.dto.FilterQueryDto;
+import com.soa.entity.GroupsCount;
 import com.soa.entity.LabWorkEntity;
 import com.soa.repository.LabWorkRepository;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class LabWorkDbService {
     }
 
     @Transactional(readOnly = true)
-    public List<Integer> getGroupedByCoordinates() {
+    public List<GroupsCount> getGroupedByCoordinates() {
         return labWorkRepository.getGroupedByCoordinates();
     }
 

@@ -1,6 +1,7 @@
 package com.soa.repository;
 
 import com.soa.dto.FilterQueryDto;
+import com.soa.entity.GroupsCount;
 import com.soa.entity.LabWorkEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,8 +16,9 @@ public interface LabWorkRepository extends JpaRepository<LabWorkEntity, Integer>
     @Query("select sum(l.minimalPoint) from LabWorkEntity l")
     Integer getSumOfMinimalPoint();
 
-    @Query("select count (l.id) from LabWorkEntity l group by l.coordinates.x, l.coordinates.y")
-    List<Integer> getGroupedByCoordinates();
+    @Query("select l.coordinates.x as x, l.coordinates.y as y, count (l.id) as cnt from LabWorkEntity l" +
+            " group by l.coordinates.x, l.coordinates.y")
+    List<GroupsCount> getGroupedByCoordinates();
 
     @Query("select distinct l.minimalPoint from LabWorkEntity l")
     List<Integer> getDistinctByMinimalPoint();

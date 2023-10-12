@@ -1,5 +1,6 @@
 package com.soa.controller;
 
+import com.soa.entity.GroupsCount;
 import com.soa.service.CoordinatesService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class CoordinatesController {
     private CoordinatesService coordinatesService;
 
     @GetMapping("/grouped")
-    public ResponseEntity<List<Integer>> getGroupedByCoordinates() {
+    public ResponseEntity<List<GroupsCount>> getGroupedByCoordinates() {
         return ResponseEntity.status(200).body(coordinatesService.getGroupedByCoordinates());
     }
 }
