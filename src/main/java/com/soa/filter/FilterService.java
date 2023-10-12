@@ -5,9 +5,14 @@ import com.soa.exception.NotValidParamsException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+
 @Service
 @AllArgsConstructor
 public class FilterService {
+    public static List<String> sortingFields = List.of("id", "name", "x", "y", "difficulty", "mimimalPoint", "disciplineName", "selfStudyHours");
+
     public static void isValidRequestParams(FilterQueryDto dto) {
         if (dto.getId() != null) {
             dto.getId().forEach(id -> checkNumberIsPositive("Id", id));
@@ -28,6 +33,9 @@ public class FilterService {
         }
         if (dto.getOffset() != null) {
             checkNumberIsNatural("Offset", dto.getOffset());
+        }
+        if (dto.getSortingFields() != null) {
+            checkSortingFields(dto.getSortingFields());
         }
     }
 
@@ -60,6 +68,13 @@ public class FilterService {
     public static void checkEmpty(String value) {
         if (value == null || value.isBlank()) {
             throw new NotValidParamsException("Поля не должны быть пустыми");
+        }
+    }
+
+    public static void checkSortingFields(List<String> fields) {
+        for (String field : fields) {
+            if (!sortingFields.contains(field))
+                throw new NotValidParamsException("Поля не должны быть пустыми");
         }
     }
 }

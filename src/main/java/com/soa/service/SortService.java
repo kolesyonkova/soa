@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class SortService {
-    public Sort getSort(String sort) {
+    public Sort.Direction getSort(String sort) {
         if ("desc".equals(sort)) {
-            return Sort.by("id").descending();
+            return Sort.Direction.DESC;
         } else {
-            return Sort.by("id").ascending();
+            return Sort.Direction.ASC;
         }
     }
 }
