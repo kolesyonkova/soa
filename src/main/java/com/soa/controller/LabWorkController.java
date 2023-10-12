@@ -1,7 +1,9 @@
 package com.soa.controller;
 
+import com.soa.dto.DisciplineDto;
 import com.soa.dto.FilterQueryDto;
 import com.soa.dto.LabWorkDto;
+import com.soa.service.DisciplineService;
 import com.soa.service.LabWorkService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LabWorkController {
     private final LabWorkService labWorkService;
+    private final DisciplineService disciplineService;
 
     @PostMapping
     public ResponseEntity<LabWorkDto> createLabWork(@Valid @RequestBody LabWorkDto dto) {
@@ -49,6 +52,13 @@ public class LabWorkController {
                                                                @RequestParam(value = "limit", defaultValue = "5") int limit) {
 
         return ResponseEntity.status(200).body(labWorkService.getLabworksSuggest(name, limit));
+    }
+
+    @GetMapping("/disciplines/suggest")
+    public ResponseEntity<List<DisciplineDto>> getDisciplinesSuggest(@RequestParam("name") String name,
+                                                                     @RequestParam(value = "limit", defaultValue = "5") int limit) {
+
+        return ResponseEntity.status(200).body(disciplineService.suggest(name, limit));
     }
 
     @DeleteMapping("/{id}")

@@ -17,6 +17,7 @@ public class DisciplineConverter {
     public DisciplineDto convertToDto(DisciplineEntity entity) {
         DisciplineDto dto = new DisciplineDto();
         dto
+                .setId(entity.getId())
                 .setName(entity.getName())
                 .setSelfStudyHours(entity.getSelfStudyHours());
         return dto;
