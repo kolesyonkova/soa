@@ -4,11 +4,13 @@ import com.soa.converter.LabWorkConverter;
 import com.soa.dto.Difficulty;
 import com.soa.dto.FilterQueryDto;
 import com.soa.dto.LabWorkDto;
+import com.soa.entity.DisciplineEntity;
 import com.soa.entity.LabWorkEntity;
 import com.soa.exception.EntityNotFoundException;
 import com.soa.exception.IncreaseNotAvailableException;
 import com.soa.exception.NotValidParamsException;
 import com.soa.filter.FilterService;
+import com.soa.service.db.DisciplineDbService;
 import com.soa.service.db.LabWorkDbService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LabWorkService {
     private final LabWorkDbService labWorkDbService;
+    private final DisciplineDbService disciplineDbService;
     private final LabWorkConverter labWorkConverter;
     private final PageService pageService;
 
@@ -67,6 +70,16 @@ public class LabWorkService {
     public void deleteById(Integer id) {
         labWorkDbService.findById(id).orElseThrow(EntityNotFoundException::new);
         labWorkDbService.deleteById(id);
+    }
+
+    public List<LabWorkDto> makeHardcore(Integer id) {
+        DisciplineEntity discipline = disciplineDbService.findById(id).orElseThrow(EntityNotFoundException::new);
+        List<LabWorkEntity> labWorkEntities = labWorkDbService.getHardestLabWorks();
+        for (LabWorkEntity entity : labWorkEntities) {
+            entity.setDiscipline(discipline);
+            labWorkDbService.save(entity);
+        }
+        return labWorkEntities.stream().map(labWorkConverter::convertToDto).toList();
     }
 
     private void validate(LabWorkDto labWork) {

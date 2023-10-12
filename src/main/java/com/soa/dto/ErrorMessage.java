@@ -10,5 +10,5 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 public class ErrorMessage {
-    private  String message;
+    private String message;
 }

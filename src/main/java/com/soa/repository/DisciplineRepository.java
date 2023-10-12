@@ -1,12 +1,11 @@
 package com.soa.repository;
 
-import java.util.List;
-
 import com.soa.entity.DisciplineEntity;
-import com.soa.entity.LabWorkEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface DisciplineRepository extends JpaRepository<DisciplineEntity, Integer> {
 

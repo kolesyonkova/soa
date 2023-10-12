@@ -7,8 +7,7 @@ public enum Difficulty {
     VERY_HARD(3, 1),
     IMPOSSIBLE(2, 2),
     INSANE(1, 3),
-    TERRIBLE(0, 4)
-    ;
+    TERRIBLE(0, 4);
 
     private final int maxAvailableIncrease;
     private final int currentDifficulty;
@@ -27,7 +26,7 @@ public enum Difficulty {
     }
 
     public static Difficulty getDifficulty(Integer difficulty) {
-        for (Difficulty d: Difficulty.values()) {
+        for (Difficulty d : Difficulty.values()) {
             if (difficulty.equals(d.getCurrentDifficulty())) {
                 return d;
             }
