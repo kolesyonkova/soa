@@ -1,5 +1,6 @@
 package com.soa.handler;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.soa.controller.LabWorkController;
 import com.soa.dto.ErrorMessage;
 import com.soa.exception.EntityNotFoundException;
@@ -26,6 +27,12 @@ public class ProcessExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<?> handleException(Exception e) {
+        return ResponseEntity.status(400)
+                .body(errorMessage.setMessage(e.getMessage()));
+    }
+
+    @ExceptionHandler({InvalidFormatException.class})
+    public ResponseEntity<?> handleInvalidFormatException(InvalidFormatException e) {
         return ResponseEntity.status(400)
                 .body(errorMessage.setMessage(e.getMessage()));
     }

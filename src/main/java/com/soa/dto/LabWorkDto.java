@@ -16,12 +16,12 @@ import java.time.LocalDate;
 public class LabWorkDto {
     @JsonIgnoreProperties
     private Integer id;
-    @NotBlank
+    @NotBlank(message = "Имя не должно быть пустым")
     private String name;
     @NotNull
     private CoordinatesDto coordinates;
     private LocalDate creationDate;
-    @Min(value = 0)
+    @Min(value = 0, message = "Минимальная оценка должна быть больше 0")
     private Integer minimalPoint;
     private Difficulty difficulty;
     @NotNull

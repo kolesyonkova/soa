@@ -7,6 +7,7 @@ import com.soa.dto.LabWorkDto;
 import com.soa.entity.LabWorkEntity;
 import com.soa.exception.EntityNotFoundException;
 import com.soa.exception.IncreaseNotAvailableException;
+import com.soa.exception.NotValidParamsException;
 import com.soa.filter.FilterService;
 import com.soa.service.db.LabWorkDbService;
 import lombok.AllArgsConstructor;
@@ -23,12 +24,14 @@ public class LabWorkService {
     private final PageService pageService;
 
     public LabWorkDto createLabWork(LabWorkDto dto) {
+        validate(dto);
         LabWorkEntity entity = labWorkConverter.convertToEntity(dto);
         entity = labWorkDbService.save(entity);
         return labWorkConverter.convertToDto(entity);
     }
 
     public LabWorkDto updateLabWork(Integer id, LabWorkDto dto) {
+        validate(dto);
         labWorkDbService.findById(id).orElseThrow(EntityNotFoundException::new);
         LabWorkEntity entity = labWorkConverter.convertToEntity(dto);
         entity.setId(id);
@@ -64,5 +67,15 @@ public class LabWorkService {
     public void deleteById(Integer id) {
         labWorkDbService.findById(id).orElseThrow(EntityNotFoundException::new);
         labWorkDbService.deleteById(id);
+    }
+
+    private void validate(LabWorkDto labWork) {
+        if (labWork.getCoordinates().getX() <= -569) {
+            throw new NotValidParamsException("X координата должна быть больше -569");
+        }
+
+        if (labWork.getCoordinates().getY() <= -302.0) {
+            throw new NotValidParamsException("Y координата должна быть больше -302");
+        }
     }
 }

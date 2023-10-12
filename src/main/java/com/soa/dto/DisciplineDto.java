@@ -14,7 +14,7 @@ public class DisciplineDto {
 
     @JsonIgnoreProperties
     private Integer id;
-    @NotBlank
+    @NotBlank(message = "Название дисциплины не должно быть пустым")
     private String name;
     private int selfStudyHours = 0;
 }
