@@ -64,7 +64,7 @@ public class ProcessExceptionHandler {
     @ExceptionHandler({HttpMessageNotReadableException.class})
     public ResponseEntity<?> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         return ResponseEntity.status(422)
-                .body(errorMessage.setMessage(e.getMessage()));
+                .body(errorMessage.setMessage("Невалидные формат json"));
     }
 
 
