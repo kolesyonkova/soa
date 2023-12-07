@@ -12,8 +12,8 @@ services:
     ports:
       - "15432:5432"
 
-  service-1:
-    image: service-1
+  service1:
+    image: service1
     build:
       context: FirstService
       dockerfile: Dockerfile
@@ -30,51 +30,16 @@ services:
     ports:
       - "8089:8089"
 
-  service-1-2:
-    image: service-1
-    build:
-      context: FirstService
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-    environment:
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PASSWORD=postgres
-      - CONSUL_HOST=consul_service
-      - CONSUL_PORT=8500
-      - SERVER_PORT=8089
-    ports:
-      - "8090:8090"
-
-  service-2:
-    image: service-2
+  service2:
+    image: service2
     build:
       context: SecondService
       dockerfile: Dockerfile
     depends_on:
       - db
-      - service-1
-    environment:
-      - CONSUL_HOST=consul
-      - CONSUL_PORT=8500
+      - service1
     ports:
       - "8081:8081"
-
-  service-2-2:
-    image: service-2
-    build:
-      context: SecondService
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-      - service-1
-    environment:
-      - CONSUL_HOST=consul
-      - CONSUL_PORT=8500
-    ports:
-      - "8082:8081"
 
   haproxy:
     image: haproxy:2.1.4
