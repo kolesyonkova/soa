@@ -25,6 +25,9 @@ public class LabWorkServiceImpl implements LabWorkService {
             client = ClientBuilder.newClient();
 
             Response response = client.target(url).request(MediaType.APPLICATION_JSON_TYPE).get();
+            if (response.getStatus() != 200) {
+                throw new RuntimeException("Запрос завершился провалом");
+            }
             LabWorkDto lb = response.readEntity(LabWorkDto.class);
 
             client.close();
@@ -42,6 +45,7 @@ public class LabWorkServiceImpl implements LabWorkService {
             client = ClientBuilder.newClient();
 
             LabWorkListDTO response = client.target(url).request(MediaType.APPLICATION_JSON_TYPE).get(LabWorkListDTO.class);
+
             client.close();
 
             return response.getLabWorkResponseDtos();
