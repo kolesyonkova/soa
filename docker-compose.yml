@@ -76,8 +76,8 @@ services:
     restart: always
     ports:
       - "10000:10000"
+      - "10100:10100"
       - "8084:8084" # web ui port
-      - "443:443"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
 
