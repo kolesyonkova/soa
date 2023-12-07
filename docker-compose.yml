@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.7"
 
 services:
   db:
@@ -12,13 +12,6 @@ services:
     ports:
       - "15432:5432"
 
-  consul:
-    container_name: consul
-    image: consul:1.14.2
-    ports:
-      - "8500:8500"
-      - "8600:8600"
-
   service-1:
     image: service-1
     build:
@@ -26,17 +19,34 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - db
-      - consul
     environment:
       - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=postgres
-      - CONSUL_HOST=consul
+      - CONSUL_HOST=consul_service
       - CONSUL_PORT=8500
-      - SERVER_PORT=8088
+      - SERVER_PORT=8089
     ports:
-      - "8088:8088"
+      - "8089:8089"
+
+  service-1-2:
+    image: service-1
+    build:
+      context: FirstService
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+      - CONSUL_HOST=consul_service
+      - CONSUL_PORT=8500
+      - SERVER_PORT=8089
+    ports:
+      - "8090:8090"
 
   service-2:
     image: service-2
@@ -52,14 +62,44 @@ services:
     ports:
       - "8081:8081"
 
-  haproxy:
-    image: "haproxy:2.2-alpine"
-    container_name: haproxy
+  service-2-2:
+    image: service-2
+    build:
+      context: SecondService
+      dockerfile: Dockerfile
     depends_on:
+      - db
       - service-1
-      - service-2
+    environment:
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+    ports:
+      - "8082:8081"
+
+  haproxy:
+    image: haproxy:2.1.4
+    container_name: haproxy
+    restart: always
     ports:
       - "10000:10000"
-      - "10100:10100"
+      - "8084:8084" # web ui port
+      - "443:443"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+  consulservice:
+    container_name: consul_service
+    image: consul:1.7.3
+    restart: unless-stopped
+    ports:
+      - "8500:8500" # HTTP API and UI port
+      - "8600:8600/udp" # DNS Port
+    command: consul agent -dev -config-dir /etc/consul.d
+    volumes:
+      - ./consul.server.json:/etc/consul.d/consul.server.json
+
+
+networks:
+  default:
+    name: consul_haproxy.network
+    driver: bridge
